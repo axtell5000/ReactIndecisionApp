@@ -2,6 +2,7 @@ const path = require('path');
 
 // path uses an absolute path, so we must use node path and __dirname, public is a folder in our project to put
 // bundle.js in
+// use - to include multiple loaders
 module.exports = {
   entry: "./src/app.js",
   output: {
@@ -13,7 +14,15 @@ module.exports = {
       {
         loader: 'babel-loader',
         test: /\.js$/,
-        exclude: '/node_modules/'
+        exclude: /node_modules/
+      },
+      {
+        test: /\.s?css$/, //cater for both css and scss
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
